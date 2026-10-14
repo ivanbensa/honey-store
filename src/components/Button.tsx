@@ -1,10 +1,11 @@
 interface ButtonProps {
     text: string;
+    onClick?: () => void;
 }
 
-function Button({ text } : ButtonProps) {
+function Button({ text, onClick } : ButtonProps) {
     return(
-        <button className="
+        <button onClick={onClick} className="
                 bg-amber-500
                 text-white
                 px-4
