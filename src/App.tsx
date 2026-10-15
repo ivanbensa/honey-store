@@ -3,12 +3,44 @@ import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
 import { useState } from 'react';
 
+interface CartItem {
+    id:number;
+    name:string;
+    price:number;
+    image:string;
+    quantity:number;
+}
+
+interface Product {
+    id:number;
+    name:string;
+    price:number;
+    image:string;
+}
 
 function App() {
     const [cartCount, setCartCount] = useState(0);
+    const [cart, setCart] = useState<CartItem[]>([]);
 
-    function addToCart() {
-        setCartCount(prev => prev + 1);
+    function addToCart(product:Product) {
+        setCart(prevCart => {
+            const existingProduct = prevCart.find(
+                item => item.id === product.id
+            );
+            if (existingProduct) {
+
+            }
+            return prevCart.map((item) => {
+                if (item.id === product.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity + 1
+                    };
+                }
+
+                return item;
+            });
+        });
     }
   return (
       <>
