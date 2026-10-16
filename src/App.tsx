@@ -2,6 +2,8 @@ import Header from './components/Header';
 import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
 import { useState } from 'react';
+import {qunit} from "globals";
+import Button from "./components/Button.tsx";
 
 interface CartItem {
     id:number;
@@ -19,8 +21,15 @@ interface Product {
 }
 
 function App() {
-    const [cartCount, setCartCount] = useState(0);
     const [cart, setCart] = useState<CartItem[]>([]);
+
+    const cartCount = cart.reduce((total, item) => {
+        return total + item.quantity;
+    }, 0);
+
+    const totalPrice = cart.reduce((total, item) => {
+            return total + item.price * item.quantity
+    }, 0);
 
     function addToCart(product:Product) {
         setCart(prevCart => {
@@ -28,20 +37,33 @@ function App() {
                 item => item.id === product.id
             );
             if (existingProduct) {
+                return prevCart.map((item) => {
+                    if (item.id === product.id) {
+                        return {
+                            ...item,
+                            quantity: item.quantity + 1
+                        };
+                    }
 
+                    return item;
+                });
             }
-            return prevCart.map((item) => {
-                if (item.id === product.id) {
-                    return {
-                        ...item,
-                        quantity: item.quantity + 1
-                    };
+            return [
+                ...prevCart,
+                {
+                    ...product,
+                    quantity: 1
                 }
-
-                return item;
-            });
+            ];
         });
     }
+
+    function removeFromCart(id: number) {
+        setCart(prevCart => {
+            return prevCart.filter(item => item.id !== id);
+        });
+    }
+
   return (
       <>
           <main className="max-w-7xl mx-auto px-6">
@@ -53,10 +75,22 @@ function App() {
                   name={product.name}
                   price={product.price}
                   image={product.image}
-                  onAddToCart={addToCart}
+                  onAddToCart={() => addToCart(product)}
                   />
               ))}
             </div>
+
+
+              {cart.map((item) => (
+                  <div key={item.id}>
+                      <h3>{item.name}</h3>
+                      <p>Quantity: {item.quantity}</p>
+                      <p>Price: {(item.price * item.quantity).toFixed(2)} €</p>
+                      <Button onClick={() => removeFromCart(item.id)} text="Remove"/>
+                  </div>
+              ))}
+
+              <p>Total: {totalPrice.toFixed(2)} €</p>
           </main>
       </>
   );
