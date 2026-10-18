@@ -2,7 +2,6 @@ import Header from './components/Header';
 import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
 import { useState } from 'react';
-import {qunit} from "globals";
 import Button from "./components/Button.tsx";
 
 interface CartItem {
