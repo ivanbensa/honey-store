@@ -3,6 +3,7 @@ import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
 import { useState } from 'react';
 import Button from "./components/Button.tsx";
+import Cart from "./components/Cart";
 
 interface CartItem {
     id:number;
@@ -79,6 +80,7 @@ function App() {
               ))}
             </div>
 
+              <Cart cart={cart} />
 
               {cart.map((item) => (
                   <div key={item.id}>
