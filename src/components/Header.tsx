@@ -2,9 +2,10 @@ import Button from "./Button";
 
 interface HeaderProps {
     cartCount: number;
+    onCartClick: () => void;
 }
 
-function Header({ cartCount }: HeaderProps) {
+function Header({ cartCount, onCartClick }: HeaderProps) {
     return (
         <header className="
             flex items-center justify-between
@@ -32,7 +33,10 @@ function Header({ cartCount }: HeaderProps) {
                 </a>
             </nav>
 
-            <Button text={`🛒 ${cartCount}`} />
+            <Button
+                text={`🛒 ${cartCount}`}
+                onClick={onCartClick}
+            />
         </header>
     );
 }

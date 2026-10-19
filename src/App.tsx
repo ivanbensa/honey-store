@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Cart from "./components/Cart";
 import ProductDetails from "./components/ProductDetails";
 import Hero from "./components/Hero";
+import Footer from "./components/Footer";
 
 interface CartItem {
     id:number;
@@ -26,6 +27,7 @@ function App() {
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("All");
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
 
 
@@ -80,7 +82,11 @@ function App() {
   return (
       <>
           <main className="max-w-7xl mx-auto px-6">
-              <Header cartCount={cartCount} />
+              <Header
+                  cartCount={cartCount}
+                  onCartClick={() => setIsCartOpen(prev => !prev)}
+              />
+
               <Hero />
 
               <input
@@ -155,10 +161,53 @@ function App() {
                   />
               )}
 
-              <Cart cart={cart} removeFromCart={removeFromCart} />
+              {isCartOpen && (
+                  <div className="fixed inset-0 z-50">
 
-              <p>Total: {totalPrice.toFixed(2)} €</p>
+                      {/* Tamna pozadina */}
+                      <div
+                          className="absolute inset-0 bg-black/50"
+                          onClick={() => setIsCartOpen(false)}
+                      />
+
+                      {/* Sidebar */}
+                      <aside className="
+            absolute right-0 top-0
+            h-full w-full max-w-md
+            overflow-y-auto
+            bg-amber-50 p-6
+            shadow-2xl
+        ">
+
+                          {/* Close button */}
+                          <button
+                              onClick={() => setIsCartOpen(false)}
+                              className="
+                    absolute right-5 top-5
+                    text-2xl text-stone-700
+                    hover:text-amber-700
+                    cursor-pointer
+                "
+                          >
+                              ✕
+                          </button>
+
+                          <Cart
+                              cart={cart}
+                              removeFromCart={removeFromCart}
+                          />
+
+                          <div className="mt-6 border-t border-amber-200 pt-4">
+                              <p className="text-xl font-bold text-stone-900">
+                                  Total: {totalPrice.toFixed(2)} €
+                              </p>
+                          </div>
+
+                      </aside>
+                  </div>
+              )}
           </main>
+          <Footer />
       </>
   );
 }

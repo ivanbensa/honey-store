@@ -15,18 +15,54 @@ interface CartProps {
 
 function Cart({ cart, removeFromCart }: CartProps) {
     return (
-        <>
-        <h2>Shopping Cart</h2>
-            {cart.map((item) => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price: {(item.price * item.quantity).toFixed(2)}</p>
-                    <Button onClick={() => removeFromCart(item.id)} text="Remove"/>
+        <section className="pt-10">
+
+            <h2 className="mb-6 font-serif text-3xl font-bold text-stone-900">
+                🛒 Shopping Cart
+            </h2>
+
+            {cart.length === 0 ? (
+                <p className="text-stone-500">
+                    Your cart is empty.
+                </p>
+            ) : (
+                <div className="space-y-4">
+                    {cart.map((item) => (
+                        <div
+                            key={item.id}
+                            className="flex flex-col gap-4 rounded-xl border border-amber-100 bg-white p-4 sm:flex-row sm:items-center"
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.name}
+                                className="h-24 w-24 rounded-lg object-cover"
+                            />
+
+                            <div className="flex-1">
+                                <h3 className="text-lg font-semibold text-stone-900">
+                                    {item.name}
+                                </h3>
+
+                                <p className="text-sm text-stone-500">
+                                    Quantity: {item.quantity}
+                                </p>
+
+                                <p className="mt-2 font-bold text-amber-700">
+                                    {(item.price * item.quantity).toFixed(2)} €
+                                </p>
+                            </div>
+
+                            <Button
+                                text="Remove"
+                                onClick={() => removeFromCart(item.id)}
+                                variant="secondary"
+                            />
+                        </div>
+                    ))}
                 </div>
-            ))}
-        </>
-    )
+            )}
+        </section>
+    );
 }
 
 export default Cart
