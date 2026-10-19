@@ -119,18 +119,34 @@ function App() {
                   </button>
               </div>
 
-            <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                  <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  onAddToCart={() => addToCart(product)}
-                  onViewDetails={() => setSelectedProduct(product)}
-                  />
-              ))}
-            </div>
+              <div id="products" className="mt-12 mb-8">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 mb-2">
+                      OUR MOST POPULAR PRODUCTS
+                  </p>
+
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold text-stone-900">
+                      Featured Honey
+                  </h2>
+
+                  <p className="text-stone-600 mt-3">
+                      Discover our selection of pure, natural honey.
+                  </p>
+              </div>
+
+              <div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                  {filteredProducts.map((product) => (
+                      <ProductCard
+                          key={product.id}
+                          name={product.name}
+                          price={product.price}
+                          image={product.image}
+                          onAddToCart={() => addToCart(product)}
+                          onViewDetails={() => setSelectedProduct(product)}
+                      />
+                  ))}
+              </div>
 
               {selectedProduct && (
                   <ProductDetails

@@ -1,20 +1,33 @@
 interface ButtonProps {
     text: string;
     onClick?: () => void;
+    variant?: "primary" | "secondary";
 }
 
-function Button({ text, onClick } : ButtonProps) {
-    return(
-        <button onClick={onClick} className="
-                bg-amber-500
-                text-white
-                px-4
-                py-2
+function Button({
+                    text,
+                    onClick,
+                    variant = "primary"
+                }: ButtonProps) {
+
+    const variantClasses = variant === "primary"
+        ? "bg-amber-400 text-stone-950 hover:bg-amber-500"
+        : "bg-white text-amber-700 border border-amber-400 hover:bg-amber-50";
+
+    return (
+        <button
+            onClick={onClick}
+            className={`
+                px-5 py-3
                 rounded-lg
-                hover:bg-amber-600
+                font-medium
                 cursor-pointer
-                transition-colors"
-        >{ text }</button>
+                transition-colors
+                ${variantClasses}
+            `}
+        >
+            {text}
+        </button>
     );
 }
 

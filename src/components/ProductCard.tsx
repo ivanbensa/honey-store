@@ -10,12 +10,22 @@ interface ProductProps {
 
 function ProductCard({name, price, image, onAddToCart, onViewDetails}: ProductProps) {
     return(
-        <div className="bg-white rounded-xl shadow-md p-6 border">
-            <img className="w-full aspect-[3/4] object-cover rounded-lg mb-4" src={image} alt={name} />
-            <h3 className="text-xl font-semibold">{ name }</h3>
-            <p className="text-lg font-bold text-amber-600">{ price.toFixed(2) } €</p>
-            <Button onClick={onAddToCart} text="Add to Cart" />
-            <Button onClick={onViewDetails} text="View Details" />
+        <div className="group bg-white rounded-2xl border border-amber-100 p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <img className="w-full h-64 object-contain bg-amber-50 rounded-xl mb-5" src={image} alt={name} />
+            <h3 className="text-xl font-semibold text-stone-800 mb-2">{ name }</h3>
+            <p className="text-2xl font-bold text-amber-700 mb-5">{ price.toFixed(2) } €</p>
+            <div className="flex flex-wrap gap-3 mt-4">
+                <Button
+                    text="Add to Cart"
+                    onClick={onAddToCart}
+                />
+
+                <Button
+                    text="View Details"
+                    onClick={onViewDetails}
+                    variant="secondary"
+                />
+            </div>
         </div>
     );
 }
