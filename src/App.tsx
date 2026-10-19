@@ -2,8 +2,9 @@ import Header from './components/Header';
 import ProductCard from "./components/ProductCard";
 import { products } from "./data/products";
 import { useState } from 'react';
-import Button from "./components/Button.tsx";
 import Cart from "./components/Cart";
+import ProductDetails from "./components/ProductDetails";
+import Hero from "./components/Hero";
 
 interface CartItem {
     id:number;
@@ -24,6 +25,9 @@ function App() {
     const [cart, setCart] = useState<CartItem[]>([]);
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("All");
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+
 
     const filteredProducts = products.filter((product) => {
         const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
@@ -76,15 +80,21 @@ function App() {
   return (
       <>
           <main className="max-w-7xl mx-auto px-6">
-          <Header cartCount={cartCount} />
+              <Header cartCount={cartCount} />
+              <Hero />
+
               <input
                   type="text"
                   placeholder="Search honey..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
+                  className="   my-6 w-full rounded-xl
+                                border border-stone-300 bg-white
+                                px-5 py-3 outline-none transition-all
+                                focus:border-amber-500
+                                focus:ring-2 focus:ring-amber-200
+                                md:w-96"
               />
-
-              <p>{search}</p>
 
               <div className="flex gap-3 my-6">
                   <button
@@ -117,9 +127,17 @@ function App() {
                   price={product.price}
                   image={product.image}
                   onAddToCart={() => addToCart(product)}
+                  onViewDetails={() => setSelectedProduct(product)}
                   />
               ))}
             </div>
+
+              {selectedProduct && (
+                  <ProductDetails
+                      product={selectedProduct}
+                      onClose={() => setSelectedProduct(null)}
+                  />
+              )}
 
               <Cart cart={cart} removeFromCart={removeFromCart} />
 
