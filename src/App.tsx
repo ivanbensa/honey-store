@@ -22,6 +22,15 @@ interface Product {
 
 function App() {
     const [cart, setCart] = useState<CartItem[]>([]);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("All");
+
+    const filteredProducts = products.filter((product) => {
+        const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+        const matchesCategory = category === "All" || product.category === category;
+
+        return matchesCategory && matchesSearch
+    });
 
     const cartCount = cart.reduce((total, item) => {
         return total + item.quantity;
@@ -68,8 +77,40 @@ function App() {
       <>
           <main className="max-w-7xl mx-auto px-6">
           <Header cartCount={cartCount} />
+              <input
+                  type="text"
+                  placeholder="Search honey..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+              />
+
+              <p>{search}</p>
+
+              <div className="flex gap-3 my-6">
+                  <button
+                      onClick={() => setCategory("All")}
+                      className="px-5 py-2 bg-amber-500 text-white rounded-lg cursor-pointer"
+                  >
+                      All
+                  </button>
+
+                  <button
+                      onClick={() => setCategory("Floral")}
+                      className="px-5 py-2 bg-amber-500 text-white rounded-lg cursor-pointer"
+                  >
+                      Floral
+                  </button>
+
+                  <button
+                      onClick={() => setCategory("Forest")}
+                      className="px-5 py-2 bg-amber-500 text-white rounded-lg cursor-pointer"
+                  >
+                      Forest
+                  </button>
+              </div>
+
             <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <ProductCard
                   key={product.id}
                   name={product.name}
@@ -80,16 +121,7 @@ function App() {
               ))}
             </div>
 
-              <Cart cart={cart} />
-
-              {cart.map((item) => (
-                  <div key={item.id}>
-                      <h3>{item.name}</h3>
-                      <p>Quantity: {item.quantity}</p>
-                      <p>Price: {(item.price * item.quantity).toFixed(2)} €</p>
-                      <Button onClick={() => removeFromCart(item.id)} text="Remove"/>
-                  </div>
-              ))}
+              <Cart cart={cart} removeFromCart={removeFromCart} />
 
               <p>Total: {totalPrice.toFixed(2)} €</p>
           </main>
