@@ -9,7 +9,7 @@ function About() {
 
                 <div>
                     <img
-                        src="/images/honey.webp"
+                        src={`${import.meta.env.BASE_URL}images/honey.webp`}
                         alt="Pure natural honey"
                         className="h-72 w-full rounded-2xl object-cover md:h-96"
                     />

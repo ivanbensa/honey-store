@@ -62,7 +62,7 @@ function Hero() {
                 {/* RIGHT SIDE */}
                 <div className="flex justify-center">
                     <img
-                        src="/images/honey.webp"
+                        src={`${import.meta.env.BASE_URL}images/honey.webp`}
                         alt="Natural honey"
                         className="
                             h-80 w-full max-w-sm
