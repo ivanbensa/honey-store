@@ -1,3 +1,4 @@
+// Displays the website footer with navigation links and information
 function Footer() {
     return (
         <footer className="mt-20 bg-stone-900 text-stone-300 rounded-t-3xl">
@@ -42,6 +43,7 @@ function Footer() {
 
                 </div>
 
+                {/* Automatically displays the current year */}
                 <div className="border-t border-stone-700 mt-10 pt-6 text-center text-sm">
                     © {new Date().getFullYear()} Honey Store. All rights reserved.
                 </div>

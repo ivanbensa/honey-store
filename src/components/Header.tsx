@@ -1,13 +1,15 @@
-
-import { useState } from "react";
+import {useState} from "react";
 import Button from "./Button";
 
+// Defines the props required by the Header component
 interface HeaderProps {
     cartCount: number;
     onCartClick: () => void;
 }
 
-function Header({ cartCount, onCartClick }: HeaderProps) {
+function Header({cartCount, onCartClick}: HeaderProps) {
+
+    // Controls whether the mobile navigation menu is open or closed
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -22,7 +24,6 @@ function Header({ cartCount, onCartClick }: HeaderProps) {
                     🐝 Honey Store
                 </a>
 
-                {/* Desktop navigation */}
                 <nav className="hidden items-center gap-8 md:flex">
                     <a href="#" className="hover:text-amber-600">
                         Home
@@ -57,7 +58,7 @@ function Header({ cartCount, onCartClick }: HeaderProps) {
                         🛒 {cartCount}
                     </button>
 
-                    {/* Hamburger button */}
+                    {/* Toggles the mobile navigation menu */}
                     <button
                         type="button"
                         aria-label="Toggle navigation"
@@ -71,7 +72,7 @@ function Header({ cartCount, onCartClick }: HeaderProps) {
                 </div>
             </div>
 
-            {/* Mobile navigation */}
+            {/* Displays mobile navigation only when the menu is open */}
             {menuOpen && (
                 <nav
                     id="mobile-navigation"

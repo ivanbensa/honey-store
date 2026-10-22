@@ -1,3 +1,4 @@
+// Displays the hero section with a title, description, image, and shop button
 function Hero() {
     return (
         <section className="
@@ -25,7 +26,7 @@ function Hero() {
                         md:text-6xl font-bold leading-tight
                     ">
                         Pure Honey,
-                        <br />
+                        <br/>
                         Naturally Made
                     </h1>
 

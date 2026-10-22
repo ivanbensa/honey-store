@@ -1,4 +1,4 @@
-
+// Displays the About Us section with an image and information about our honey
 function About() {
     return (
         <section
@@ -22,7 +22,7 @@ function About() {
 
                     <h2 className="mb-5 font-serif text-3xl font-bold text-stone-900 md:text-4xl">
                         From Nature,
-                        <br />
+                        <br/>
                         With Love
                     </h2>
 

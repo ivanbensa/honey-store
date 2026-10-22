@@ -1,6 +1,6 @@
-
 import Button from "./Button";
 
+// Defines the product data and functions required by the ProductDetails component
 interface ProductDetailsProps {
     product: {
         id: number;
@@ -12,12 +12,14 @@ interface ProductDetailsProps {
     onAddToCart: () => void;
 }
 
-function ProductDetails({ product, onClose, onAddToCart }: ProductDetailsProps) {
+function ProductDetails({product, onClose, onAddToCart}: ProductDetailsProps) {
     return (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 p-4">
 
-            <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl md:p-8">
+            <div
+                className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl md:p-8">
 
+                {/* Closes the product details window */}
                 <button
                     type="button"
                     onClick={onClose}
@@ -53,6 +55,7 @@ function ProductDetails({ product, onClose, onAddToCart }: ProductDetailsProps) 
                             pure natural honey.
                         </p>
 
+                        {/* Handles adding the selected product to the cart or closing the window */}
                         <div className="flex flex-wrap gap-3">
                             <Button
                                 text="🛒 Add to Cart"

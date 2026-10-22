@@ -1,19 +1,21 @@
 import Button from "./Button.tsx";
 
+// Defines the structure of cart items
 interface CartItem {
-    id:number;
-    name:string;
-    price:number;
-    image:string;
-    quantity:number;
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number;
 }
 
+// Defines the props required by the Cart component
 interface CartProps {
     cart: CartItem[];
     removeFromCart: (id: number) => void;
 }
 
-function Cart({ cart, removeFromCart }: CartProps) {
+function Cart({cart, removeFromCart}: CartProps) {
     return (
         <section className="pt-10">
 
@@ -21,12 +23,15 @@ function Cart({ cart, removeFromCart }: CartProps) {
                 🛒 Shopping Cart
             </h2>
 
+            {/* Displays a message if the cart is empty, otherwise shows cart items */}
             {cart.length === 0 ? (
                 <p className="text-stone-500">
                     Your cart is empty.
                 </p>
             ) : (
                 <div className="space-y-4">
+
+                    {/* Renders each product in the shopping cart */}
                     {cart.map((item) => (
                         <div
                             key={item.id}
@@ -52,6 +57,7 @@ function Cart({ cart, removeFromCart }: CartProps) {
                                 </p>
                             </div>
 
+                            {/* Removes the selected product from the cart */}
                             <Button
                                 text="Remove"
                                 onClick={() => removeFromCart(item.id)}
