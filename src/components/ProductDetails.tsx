@@ -1,6 +1,5 @@
 import Button from "./Button";
 
-// Defines the product data and functions required by the ProductDetails component
 interface ProductDetailsProps {
     product: {
         id: number;

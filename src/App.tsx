@@ -95,16 +95,13 @@ function App() {
     return (
         <>
             <main className="max-w-7xl mx-auto px-6">
-                // Displays the header with the cart count and handles opening or closing the cart
                 <Header
                     cartCount={cartCount}
                     onCartClick={() => setIsCartOpen(prev => !prev)}
                 />
 
-                // Displays the hero section
                 <Hero/>
 
-                // Displays product categories and handles category selection
                 <Categories
                     selectedCategory={category}
                     onCategoryChange={setCategory}

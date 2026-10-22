@@ -1,4 +1,4 @@
-// Displays the hero section with a title, description, image, and shop button
+
 function Hero() {
     return (
         <section className="
