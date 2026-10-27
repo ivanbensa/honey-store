@@ -1,13 +1,5 @@
 import Button from "./Button.tsx";
-
-// Defines the structure of cart items
-interface CartItem {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    quantity: number;
-}
+import type { CartItem } from "../types/cart";
 
 // Defines the props required by the Cart component
 interface CartProps {

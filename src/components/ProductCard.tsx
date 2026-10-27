@@ -1,10 +1,8 @@
 import Button from "./Button.tsx";
+import type { Product } from "../types/products";
 
 // Defines the props required by the ProductCard component
-interface ProductProps {
-    name: string
-    price: number
-    image: string
+interface ProductProps extends Pick<Product, "name" | "price" | "image">{
     onAddToCart: () => void
     onViewDetails: () => void;
 }

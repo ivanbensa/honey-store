@@ -1,12 +1,8 @@
 import Button from "./Button";
+import type { Product } from "../types/products";
 
 interface ProductDetailsProps {
-    product: {
-        id: number;
-        name: string;
-        price: number;
-        image: string;
-    };
+    product: Product;
     onClose: () => void;
     onAddToCart: () => void;
 }

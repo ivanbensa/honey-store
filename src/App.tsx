@@ -9,23 +9,8 @@ import Footer from "./components/Footer";
 import Categories from "./components/Categories";
 import Benefits from "./components/Benefits";
 import About from "./components/About";
-
-// Defines the structure of a product added to the shopping cart
-interface CartItem {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    quantity: number;
-}
-
-// Defines the structure of a product in our store
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-}
+import type { Product } from "./types/products";
+import type { CartItem } from "./types/cart";
 
 function App() {
     // Stores the products added to the shopping cart
