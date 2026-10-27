@@ -1,18 +1,21 @@
 import ProductCard from "./ProductCard";
 import type { Product } from "../types/products";
+import type { CartItem } from "../types/cart";
 
 // Defines the props required by the ProductSection component
 interface ProductSectionProps {
     products: Product[];
+    cart: CartItem[];
     search: string;
     onSearchChange: (value: string) => void;
-    onAddToCart: (product: Product) => void;
+    onAddToCart: (product: Product, origin: DOMRect) => void;
     onViewDetails: (product: Product) => void;
 }
 
 // Displays the product search and product cards
 function ProductSection({
                             products,
+                            cart,
                             search,
                             onSearchChange,
                             onAddToCart,
@@ -62,7 +65,7 @@ function ProductSection({
                 </div>
             </div>
 
-            {/* Displays all filtered products */}
+            {/* Displays products with their cart quantities */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {products.map((product) => (
                     <ProductCard
@@ -70,7 +73,10 @@ function ProductSection({
                         name={product.name}
                         price={product.price}
                         image={product.image}
-                        onAddToCart={() => onAddToCart(product)}
+                        quantity={
+                            cart.find(item => item.id === product.id)?.quantity ?? 0
+                        }
+                        onAddToCart={(origin) => onAddToCart(product, origin)}
                         onViewDetails={() => onViewDetails(product)}
                     />
                 ))}

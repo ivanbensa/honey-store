@@ -1,7 +1,9 @@
+import type { MouseEventHandler } from "react";
+
 // Defines the types of props accepted by the Button component
 interface ButtonProps {
     text: string;
-    onClick?: () => void;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
     variant?: "primary" | "secondary";
 }
 

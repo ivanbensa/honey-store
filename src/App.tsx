@@ -11,6 +11,7 @@ import { useCart } from "./hooks/useCart";
 import { useProductFilters } from "./hooks/useProductFilters";
 import CartSidebar from "./components/CartSidebar";
 import ProductSection from "./components/ProductSection";
+import { flyBeeToCart } from "./utils/flyBeeToCart";
 
 function App() {
 // Uses our custom hook to manage the shopping cart
@@ -54,9 +55,10 @@ function App() {
                 {/* Displays the searchable product section */}
                 <ProductSection
                     products={filteredProducts}
+                    cart={cart}
                     search={search}
                     onSearchChange={setSearch}
-                    onAddToCart={addToCart}
+                    onAddToCart={handleAddToCart}
                     onViewDetails={setSelectedProduct}
                 />
 
@@ -64,8 +66,13 @@ function App() {
                 {selectedProduct && (
                     <ProductDetails
                         product={selectedProduct}
+                        quantity={
+                            cart.find(item => item.id === selectedProduct.id)?.quantity ?? 0
+                        }
                         onClose={() => setSelectedProduct(null)}
-                        onAddToCart={() => addToCart(selectedProduct)}
+                        onAddToCart={(origin) =>
+                            handleAddToCart(selectedProduct, origin)
+                        }
                     />
                 )}
 
@@ -90,6 +97,12 @@ function App() {
             <Footer/>
         </>
     );
+
+    // Adds a product to the cart and starts the bee animation
+    function handleAddToCart(product: Product, origin: DOMRect) {
+        addToCart(product);
+        flyBeeToCart(origin);
+    }
 }
 
 export default App;

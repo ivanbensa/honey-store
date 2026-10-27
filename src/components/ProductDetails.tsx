@@ -1,13 +1,19 @@
 import Button from "./Button";
-import type { Product } from "../types/products";
+import CartBadge from "./CartBadge";
 
 interface ProductDetailsProps {
-    product: Product;
+    product: {
+        id: number;
+        name: string;
+        price: number;
+        image: string;
+    };
+    quantity: number;
     onClose: () => void;
-    onAddToCart: () => void;
+    onAddToCart: (origin: DOMRect) => void;
 }
 
-function ProductDetails({product, onClose, onAddToCart}: ProductDetailsProps) {
+function ProductDetails({product, quantity, onClose, onAddToCart}: ProductDetailsProps) {
     return (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 p-4">
 
@@ -51,17 +57,15 @@ function ProductDetails({product, onClose, onAddToCart}: ProductDetailsProps) {
                         </p>
 
                         {/* Handles adding the selected product to the cart or closing the window */}
-                        <div className="flex flex-wrap gap-3">
+                        <div className="relative inline-flex">
                             <Button
                                 text="🛒 Add to Cart"
-                                onClick={onAddToCart}
+                                onClick={(e) =>
+                                    onAddToCart(e.currentTarget.getBoundingClientRect())
+                                }
                             />
 
-                            <Button
-                                text="Close"
-                                onClick={onClose}
-                                variant="secondary"
-                            />
+                            <CartBadge quantity={quantity} />
                         </div>
 
                     </div>

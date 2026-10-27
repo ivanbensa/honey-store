@@ -41,7 +41,7 @@ function Header({cartCount, onCartClick}: HeaderProps) {
                 <div className="flex items-center gap-2">
 
                     {/* Desktop cart */}
-                    <div className="hidden sm:block">
+                    <div data-cart-target="true" className="hidden sm:block">
                         <Button
                             text={`🛒 Your Cart: ${cartCount}`}
                             onClick={onCartClick}
@@ -50,6 +50,7 @@ function Header({cartCount, onCartClick}: HeaderProps) {
 
                     {/* Mobile cart */}
                     <button
+                        data-cart-target="true"
                         type="button"
                         onClick={onCartClick}
                         aria-label={`Open cart, ${cartCount} items`}
